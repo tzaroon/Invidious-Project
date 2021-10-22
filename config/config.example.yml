@@ -9,11 +9,11 @@
 ## This setting is MANDATORY, unless 'database_url' is used.
 ##
 db:
-  user: kemal
-  password: kemal
-  host: localhost
+  user: replaceable_db_user
+  password: replaceable_db_passwd
+  host: replaceable_db_host
   port: 5432
-  dbname: invidious
+  dbname: replaceable_db_name
 
 ##
 ## Database configuration using a single URI. This is an
@@ -29,7 +29,7 @@ db:
 ## Accepted values: a postgres:// URI
 ## Default: postgres://kemal:kemal@localhost:5432/invidious
 ##
-#database_url: postgres://kemal:kemal@localhost:5432/invidious
+#database_url: postgres://invidious@invidious.postgres.database.azure.com:5432/postgres?user=invidious&password=asdf.asdf1
 
 ##
 ## Enable automatic table integrity check. This will create

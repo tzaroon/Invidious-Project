@@ -1,0 +1,28 @@
+
+server {
+    listen 80;
+
+    root /var/www/html/welcome-pms;
+
+    index index.html index.htm index.php;
+
+    server_name localhost;
+
+    charset utf-8;
+
+    location = /favicon.ico {
+        log_not_found off; access_log off;
+    }
+    location = /robots.txt {
+        log_not_found off; access_log off;
+    }
+    location / {
+                #deny all;
+                try_files $uri $uri/ /index.html?$args;
+      }
+    location /api/v1 {
+        root /var/www/html/chicstays-backend/public;
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+}
+

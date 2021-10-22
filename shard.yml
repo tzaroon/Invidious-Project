@@ -2,8 +2,9 @@ name: invidious
 version: 0.20.1
 
 authors:
-  - Omar Roth <omarroth@protonmail.com>
-  - Invidous team
+  - Ghulam Mujtaba <gmujtaba@puffersoft.com>
+  - Talha Zaroon <tzaroon@puffersoft.com>
+  - PufferSoft Team
 
 targets:
   invidious:

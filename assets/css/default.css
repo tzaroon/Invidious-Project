@@ -4,7 +4,9 @@ body {
     Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
 }
-
+.main-logo-invidious{
+width:100px;
+}
 #contents {
   display: flex;
   flex-direction: column;
