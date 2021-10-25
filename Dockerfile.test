@@ -1,5 +1,6 @@
 # get default docker image
-FROM crystallang/crystal:1.1.1-alpine AS builder
+#FROM crystallang/crystal:1.1.1-alpine AS builder
+FROM crystallang/crystal:latest-alpine AS builder
 
 # set build arguments
 ARG release
@@ -45,11 +46,9 @@ ARG dbpasswd
 ARG dbhost
 ARG dbname
 # Installing Bash
-RUN  apk add --no-cache bash
+# RUN  apk add --no-cache bash
 RUN sed -i 's/bin\/ash/bin\/bash/g' /etc/passwd
 
-# installing initial packages
-RUN apk add  --no-cache librsvg ttf-opensans
 
 # set working directory
 WORKDIR /invidious
@@ -78,19 +77,17 @@ COPY --from=builder /invidious/invidious .
 RUN chmod o+rX -R ./assets ./config ./locales
 
 # Installing and Configuring OpenSSH Server
-RUN apk add --no-cache openssh
-RUN echo "root:Docker!" | chpasswd
-COPY sshd_config /etc/ssh/
+# RUN apk add --no-cache openssh
+# RUN echo "root:Docker!" | chpasswd
+# COPY sshd_config /etc/ssh/
 
 # Configure Nginx
-RUN apk add nginx && echo "daemon off;" >> /etc/nginx/nginx.conf && rm /etc/nginx/http.d/default.conf
+# RUN apk add nginx && echo "daemon off;" >> /etc/nginx/nginx.conf && rm /etc/nginx/http.d/default.conf
 
-# RUN apk add nginx  && rm /etc/nginx/http.d/default.conf
-# RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-
-COPY default.conf /etc/nginx/http.d/
-RUN ln -sf /dev/stdout /var/log/nginx/access.log
-RUN ln -sf /dev/stderr /var/log/nginx/error.log
+#RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+# COPY default.conf /etc/nginx/http.d/
+# RUN ln -sf /dev/stdout /var/log/nginx/access.log
+# RUN ln -sf /dev/stderr /var/log/nginx/error.log
 #RUN rm /etc/nginx/sites-enabled/Default
 #RUN rm /etc/nginx/sites-available/Default
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
@@ -101,16 +98,15 @@ RUN echo "exit 0" > /usr/sbin/policy-rc.d
 #    find /var/www/html -type d -exec chmod 755 {} \;
 
 # Copying Initialization Script
-COPY init.sh /invidious/init.sh
-RUN chmod 755 /invidious/init.sh
+# COPY init.sh /invidious/init.sh
+# RUN chmod 755 /invidious/init.sh
 
 # expose required ports
-EXPOSE 80 2222 3000
+EXPOSE 3000
 
 #run entry script
-ENTRYPOINT ["/invidious/init.sh"]
+#ENTRYPOINT ["/invidious/init.sh"]
 
 # USER invidious
-
-# CMD ngingx -g "daemon off;" && /invidious/invidious && /etc/init.d/sshd start
-# CMD nginx -g && /etc/init.d/ssh start
+CMD /invidious/invidious
+# CMD nginx -g "daemon off;" &&  /invidious/invidious && /etc/init.d/ssh start
