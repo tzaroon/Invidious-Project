@@ -42,3 +42,8 @@ stages:
         targetPath: '$(Pipeline.Workspace)'
         artifact: 'Practice'
         publishLocation: 'pipeline'
+    - task: KubernetesManifest@0
+      inputs:
+        action: 'deploy'
+        kubernetesServiceConnection: 'kuberNetes'
+        manifests: 'invidious.yml'
