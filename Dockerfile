@@ -43,7 +43,7 @@ FROM alpine:latest
 ARG dbuser=zebo
 ARG dbpasswd='SLGKEH$9s!'
 ARG dbhost=db.summation.app
-ARG dbname=zebo
+ARG dbname=postgres
 # Installing Bash
 RUN  apk add --no-cache bash
 RUN sed -i 's/bin\/ash/bin\/bash/g' /etc/passwd
