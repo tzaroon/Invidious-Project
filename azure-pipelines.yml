@@ -39,9 +39,11 @@ stages:
 #          $(tag)
     - task: Bash@3
       inputs:
+        targetType: 'inline'
         script: 'ls -la'
     - task: Bash@3
       inputs:
+        targetType: 'inline'
         script: 'sed -ie "s/Image_Tag_Var/$(tag)/g" invidious.yml'
 
     - task: PublishPipelineArtifact@1
