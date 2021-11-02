@@ -30,7 +30,7 @@ spec:
         app: profilabackend
     spec:
       containers:
-      - image: tarigacr.azurecr.io/inv:latest-$Build.BuildId
+      - image: tarigacr.azurecr.io/inv:Image_Tag_Var
         imagePullPolicy: Always
         name: profilabackendcontainer
 #        command: ["/bin/sh","-c"]
