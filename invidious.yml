@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: brofilabackend
+  labels:
+    app: profilabackend
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: profilabackend
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profilabackend
+  labels:
+    app: profilabackend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: profilabackend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: profilabackend
+    spec:
+      containers:
+      - image: tarigacr.azurecr.io/inv:latest-$(Build.BuildId)
+        imagePullPolicy: Always
+        name: profilabackendcontainer
+#        command: ["/bin/sh","-c"]
+#        args: ["cd /home/PJMProxy && python3 run.py"]
+        ports:
+        - containerPort: 80
+          name: profilaport

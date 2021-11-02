@@ -2,7 +2,7 @@
 FROM crystallang/crystal:1.1.1-alpine AS builder
 
 # set build arguments
-ARG release
+ARG release=1
 # add some initial packages
 RUN apk add --no-cache sqlite-static yaml-static
 
@@ -40,10 +40,10 @@ RUN if [ ${release} == 1 ] ; then \
 
 # another run stage
 FROM alpine:latest
-ARG dbuser
-ARG dbpasswd
-ARG dbhost
-ARG dbname
+ARG dbuser=zebo
+ARG dbpasswd='SLGKEH$9s!'
+ARG dbhost=db.summation.app
+ARG dbname=zebo
 # Installing Bash
 RUN  apk add --no-cache bash
 RUN sed -i 's/bin\/ash/bin\/bash/g' /etc/passwd
